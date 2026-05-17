@@ -20,35 +20,47 @@ export default function Navbar() {
   return (
     <nav className="navbar no-print">
       <div className="navbar-inner">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+
+        <div className="navbar-left">
           <Link to="/" className="navbar-logo">
-            <div className="logo-mark" style={{ flexDirection: 'column', width: '58px', height: '58px', fontSize: '13px', padding: '8px' }}>
-              <span style={{ fontWeight: 700, letterSpacing: '0.05em' }}>CV</span>
-              <span style={{ fontSize: '8px', fontWeight: 400, letterSpacing: '0.1em', opacity: 0.8 }}>homepage</span>
+            <div className="logo-mark">
+              <span className="logo-cv">CV</span>
+              <span className="logo-home">HOMEPAGE</span>
             </div>
           </Link>
-          <form onSubmit={handleSearch} style={{ display: 'flex', gap: '0' }}>
-            <input className="form-input" placeholder="Search username..." value={search} onChange={e => setSearch(e.target.value)}
-              style={{ height: '38px', width: '200px', fontSize: '14px', padding: '0 12px', borderRight: 'none' }} />
-            <button type="submit" className="btn btn-primary" style={{ height: '38px', padding: '0 14px', fontSize: '14px' }}>Search</button>
+
+          <form onSubmit={handleSearch} className="navbar-search">
+            <input
+              placeholder="Search..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <button type="submit">Go</button>
           </form>
         </div>
 
         <div className="navbar-actions">
           {isAuthenticated ? (
             <>
-              {user && <Link to={`/resume/${user.username}`} className="btn btn-ghost btn-sm" target="_blank">View Profile ↗</Link>}
-              {!isDashboard && <Link to="/dashboard" className="btn btn-secondary btn-sm">Dashboard</Link>}
-              <Link to="/settings" className="btn btn-ghost btn-sm">Settings</Link>
-              <button onClick={handleLogout} className="btn btn-ghost btn-sm">Logout</button>
+              {user && (
+  <Link to={`/resume/${user.username}`} className="nav-btn nav-btn-ghost" target="_blank">
+    View ↗
+  </Link>
+)}
+              {!isDashboard && (
+                <Link to="/dashboard" className="nav-btn nav-btn-outline">Dashboard</Link>
+              )}
+             <Link to="/settings" className="nav-btn nav-btn-ghost">⚙ Settings</Link>
+<button onClick={handleLogout} className="nav-btn nav-btn-ghost">↩ Logout</button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-ghost btn-sm">Login</Link>
-              <Link to="/register" className="btn btn-primary btn-sm">Get Started</Link>
+              <Link to="/login" className="nav-btn nav-btn-ghost">Login</Link>
+              <Link to="/register" className="nav-btn nav-btn-solid">Get Started</Link>
             </>
           )}
         </div>
+
       </div>
     </nav>
   )
